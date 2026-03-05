@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSPDFR ELITE STUDIO</title>
+    
+    <!-- Google Fonts: Cinzel (Luxury) та Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="font-montserrat bg-gray-900 text-white overflow-x-hidden">
+
+    <!-- ============================================
+         1. HERO SECTION (ГОЛОВНИЙ ЕКРАН)
+         ============================================ -->
+    <section id="hero" class="relative h-screen w-full overflow-hidden">
+        
+        <!-- Video Background -->
+        <video 
+            id="hero-video"
+            class="absolute top-0 left-0 w-full h-full object-cover"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+        >
+            <source src="patrolpolice.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Black Overlay (0.6 opacity) -->
+        <div class="absolute top-0 left-0 w-full h-full bg-black/60 z-10"></div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-20 h-full flex flex-col items-center justify-center text-center px-4">
+            <h1 class="font-cinzel text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-wider animate-fade-in">
+                LSPDFR <span class="text-gold">ELITE</span> STUDIO
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl animate-fade-in-delay">
+                Професійні модифікації для поліцейських симуляторів
+            </p>
+            
+            <!-- CTA Buttons -->
+            <div class="flex gap-4 animate-fade-in-delay-2">
+                <a href="#shop" class="px-8 py-3 bg-gold text-black font-semibold rounded-lg hover:bg-yellow-500 transition-all duration-300 transform hover:scale-105">
+                    Переглянути товари
+                </a>
+                <button id="open-login-btn" class="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-black transition-all duration-300">
+                    Увійти
+                </button>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ============================================
+         2. PERSONAL CABINET (ОСОБИСТИЙ КАБІНЕТ)
+         ============================================ -->
+    <section id="cabinet" class="hidden py-4 bg-gray-800 border-b border-gray-700">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img id="user-avatar" src="" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-gold hidden">
+                <span id="user-name" class="text-gold font-semibold hidden"></span>
+            </div>
+            <button id="logout-btn" class="hidden px-4 py-2 text-sm text-red-400 hover:text-red-300 transition-colors">
+                Вийти
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================
+         3. SHOP SECTION (МАГАЗИН)
+         ============================================ -->
+    <section id="shop" class="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="font-cinzel text-4xl md:text-5xl font-bold text-center mb-4">
+                Наші <span class="text-gold">Пакети</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Оберіть ідеальний пакет для вашого поліцейського сервера
+            </p>
+            
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Product 1: Звичайний -->
+                <div class="product-card bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gold transition-all duration-300 transform hover:-translate-y-2" data-id="basic" data-name="Пак Звичайний" data-price="150">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-blue-500/20 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-cinzel text-2xl font-bold mb-2">Пак "Звичайний"</h3>
+                        <p class="text-gray-400 text-sm">Базовий набір для сервера</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-gold">150</span>
+                        <span class="text-xl text-gold">₴</span>
+                    </div>
+                    <ul class="text-gray-300 text-sm mb-6 space-y-2">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            28 поліцейських авто
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Базова підтримка
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Оновлення 6 місяців
+                        </li>
+                    </ul>
+                    <button class="buy-btn w-full py-3 bg-gold text-black font-semibold rounded-lg hover:bg-yellow-500 transition-all duration-300">
+                        Купити
+                    </button>
+                </div>
+
+                <!-- Product 2: Преміум -->
+                <div class="product-card bg-gray-800 rounded-2xl p-6 border-2 border-gold relative transform hover:-translate-y-2 transition-all duration-300" data-id="premium" data-name="Пак Преміум" data-price="300">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-gold text-black text-sm font-bold rounded-full">
+                        НАЙКРАЩИЙ ВИБІР
+                    </div>
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-cinzel text-2xl font-bold mb-2">Пак "Преміум"</h3>
+                        <p class="text-gray-400 text-sm">Повний набір з підтримкою</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-gold">300</span>
+                        <span class="text-xl text-gold">₴</span>
+                    </div>
+                    <ul class="text-gray-300 text-sm mb-6 space-y-2">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            18 поліцейських авто
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Пріоритетна підтримка
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Оновлення 12 місяців
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Ексклюзивні авто
+                        </li>
+                    </ul>
+                    <button class="buy-btn w-full py-3 bg-gold text-black font-semibold rounded-lg hover:bg-yellow-500 transition-all duration-300">
+                        Купити
+                    </button>
+                </div>
+
+                <!-- Product 3: Renault Duster -->
+                <div class="product-card bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gold transition-all duration-300 transform hover:-translate-y-2" data-id="duster" data-name="Renault Duster 2024 Pack" data-price="500">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-orange-500/20 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-cinzel text-2xl font-bold mb-2">Renault Duster 2024</h3>
+                        <p class="text-gray-400 text-sm">Сучасний поліцейський SUV</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-gold">500</span>
+                        <span class="text-xl text-gold">₴</span>
+                    </div>
+                    <ul class="text-gray-300 text-sm mb-6 space-y-2">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            4 варіанти авто
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Premium якість
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            Безкоштовні оновлення
+                        </li>
+                    </ul>
+                    <button class="buy-btn w-full py-3 bg-gold text-black font-semibold rounded-lg hover:bg-yellow-500 transition-all duration-300">
+                        Купити
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         4. COMPARISON TABLE (ПОРІВНЯЛЬНА ТАБЛИЦЯ)
+         ============================================ -->
+    <section id="comparison" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="font-cinzel text-4xl md:text-5xl font-bold text-center mb-4">
+                Порівняння <span class="text-gold">Пакетів</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Оберіть оптимальний варіант для вашого проекту
+            </p>
+            
+            <div class="max-w-4xl mx-auto overflow-x-auto">
+                <table class="w-full comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="py-4 px-6 text-left text-gray-400">Функція</th>
+                            <th class="py-4 px-6 text-center text-blue-400">Звичайний</th>
+                            <th class="py-4 px-6 text-center bg-gold/20 text-gold font-bold">Преміум</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-4 px-6 text-gray-300">Кількість авто</td>
+                            <td class="py-4 px-6 text-center text-white">28</td>
+                            <td class="py-4 px-6 text-center bg-gold/10 text-gold font-semibold">18</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 text-gray-300">Термін оновлень</td>
+                            <td class="py-4 px-6 text-center text-white">6 місяців</td>
+                            <td class="py-4 px-6 text-center bg-gold/10 text-gold font-semibold">12 місяців</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 text-gray-300">Підтримка</td>
+                            <td class="py-4 px-6 text-center text-white">Базова</td>
+                            <td class="py-4 px-6 text-center bg-gold/10 text-gold font-semibold">Пріоритетна</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 text-gray-300">Ексклюзивні авто</td>
+                            <td class="py-4 px-6 text-center text-white">❌</td>
+                            <td class="py-4 px-6 text-center bg-gold/10 text-gold font-semibold">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 text-gray-300">Індивідуальні налаштування</td>
+                            <td class="py-4 px-6 text-center text-white">❌</td>
+                            <td class="py-4 px-6 text-center bg-gold/10 text-gold font-semibold">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 text-gray-300">Доступ до бета-версій</td>
+                            <td class="py-4 px-6 text-center text-white">❌</td>
+                            <td class="py-4 px-6 text-center bg-gold/10 text-gold font-semibold">✅</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         5. 360 GALLERY (ГАЛЕРЕЯ 360°)
+         ============================================ -->
+    <section id="gallery" class="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="font-cinzel text-4xl md:text-5xl font-bold text-center mb-4">
+                360° <span class="text-gold">Галерея</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Огляньте наші поліцейські автомобілі з усіх боків
+            </p>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                    <!-- Car Preview -->
+                    <div class="relative mb-8">
+                        <img 
+                            id="car-360-image" 
+                            src="https://via.placeholder.com/800x400/1a1a2e/eab308?text=Police+Car+360+View" 
+                            alt="360 Car View" 
+                            class="w-full h-64 md:h-96 object-contain rounded-lg"
+                        >
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/60 px-4 py-2 rounded-full text-sm text-gray-300">
+                            Переміщуйте повзунок для огляду
+                        </div>
+                    </div>
+                    
+                    <!-- 360 Slider -->
+                    <div class="flex items-center gap-4">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        <input 
+                            type="range" 
+                            id="360-slider" 
+                            min="1" 
+                            max="36" 
+                            value="1" 
+                            class="flex-1 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-gold"
+                        >
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- Car Info -->
+                    <div class="mt-6 text-center">
+                        <h3 id="car-name" class="font-cinzel text-xl font-bold text-gold mb-2">Toyota Prius Police</h3>
+                        <p class="text-gray-400 text-sm">Преміум якість • Деталізований салон • Сигналізація</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         6. SMART SUPPORT (РОЗУМНА ПІДТРИМКА)
+         ============================================ -->
+    <button id="support-btn" class="fixed bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors z-50">
+        <svg class="w-7 h-7 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chat-window" class="fixed bottom-24 right-6 w-80 md:w-96 bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 overflow-hidden z-50 hidden">
+        <div class="bg-gold p-4 flex justify-between items-center">
+            <h3 class="font-bold text-black">Підтримка LSPDFR Elite</h3>
+            <button id="close-chat" class="text-black hover:text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="chat-messages" class="h-80 p-4 overflow-y-auto space-y-4">
+            <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-full bg-gold flex-shrink-0 flex items-center justify-center">
+                    <span class="text-black text-xs font-bold">AI</span>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-3 max-w-[80%]">
+                    <p class="text-sm">Вітаю! Я віртуальний помічник LSPDFR Elite Studio. Чим можу допомогти?</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-4 border-t border-gray-700">
+            <input 
+                type="text" 
+                id="chat-input" 
+                placeholder="Введіть повідомлення..." 
+                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gold"
+            >
+        </div>
+    </div>
+
+    <!-- ============================================
+         7. CART SIDEBAR (КОШИК)
+         ============================================ -->
+    <button id="cart-btn" class="fixed bottom-6 right-24 w-14 h-14 bg-gold rounded-full shadow-lg flex items-center justify-center hover:bg-yellow-500 transition-colors z-50">
+        <svg class="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+        <span id="cart-count" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">0</span>
+    </button>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-gray-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300">
+        <div class="h-full flex flex-col">
+            <!-- Cart Header -->
+            <div class="p-6 border-b border-gray-700 flex justify-between items-center">
+                <h2 class="font-cinzel text-2xl font-bold">Кошик</h2>
+                <button id="close-cart" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Cart Items -->
+            <div id="cart-items" class="flex-1 p-6 overflow-y-auto">
+                <p class="text-gray-400 text-center">Кошик порожній</p>
+            </div>
+            
+            <!-- Cart Footer -->
+            <div class="p-6 border-t border-gray-700">
+                <!-- Promo Code -->
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-2">Промокод</label>
+                    <div class="flex gap-2">
+                        <input 
+                            type="text" 
+                            id="promo-input" 
+                            placeholder="Введіть код" 
+                            class="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gold"
+                        >
+                        <button id="apply-promo" class="px-4 py-2 bg-gold text-black font-semibold rounded-lg hover:bg-yellow-500 transition-colors">
+                            OK
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Total -->
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-400">Разом:</span>
+                    <span id="cart-total" class="text-2xl font-bold text-gold">0 ₴</span>
+                </div>
+                
+                <!-- Checkout Button -->
+                <button id="checkout-btn" class="w-full py-3 bg-gold text-black font-bold rounded-lg hover:bg-yellow-500 transition-colors">
+                    Оформити замовлення
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         8. LOGIN MODAL (МОДАЛЬНЕ ВІКНО ВХОДУ)
+         ============================================ -->
+    <div id="login-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-2xl p-8 max-w-md w-full border border-gray-700">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="font-cinzel text-2xl font-bold">Вхід в систему</h2>
+                <button id="close-login" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <p class="text-gray-400 mb-6 text-center">Увійдіть через Google для доступу до особистого кабінету</p>
+            
+            <!-- Google Sign-In Button -->
+            <div id="g_id_onload"
+                 data-client_id="637144604768-b3rfbbg673ahe3ii0mjuhofn0e7qi7jm.apps.googleusercontent.com"
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false">
+            </div>
+            
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-shape="rectangular"
+                 data-theme="outline"
+                 data-text="signin_with"
+                 data-size="large"
+                 data-logo_alignment="left"
+                 data-width="100%">
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         9. LIVE SALES NOTIFICATION
+         ============================================ -->
+    <div id="live-sales" class="fixed bottom-6 left-6 z-40 hidden">
+        <div class="bg-gray-800 border border-gold rounded-lg p-4 flex items-center gap-3 animate-slide-in">
+            <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm text-gray-400">Гравець</p>
+                <p id="live-nick" class="font-bold text-gold">NickName</p>
+                <p class="text-sm text-green-400">придбав Преміум!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         10. FOOTER (ФУТЕР)
+         ============================================ -->
+    <footer class="bg-gray-900 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <h3 class="font-cinzel text-xl font-bold text-gold mb-4">LSPDFR Elite Studio</h3>
+                    <p class="text-gray-400 text-sm">
+                        Професійні модифікації для поліцейських симуляторів. 
+                        Якість та надійність з 2020 року.
+                    </p>
+                </div>
+                
+                <!-- Discord -->
+                <div>
+                    <h3 class="font-cinzel text-xl font-bold text-gold mb-4">Discord</h3>
+                    <p class="text-gray-400 text-sm mb-4">Приєднуйтесь до нашої спільноти</p>
+                    <a id="discord-link" href="https://discord.gg/your-server" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-[#5865F2] text-white rounded-lg hover:bg-[#4752C4] transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+                        Приєднатися
+                    </a>
+                </div>
+                
+                <!-- QR Code -->
+                <div>
+                    <h3 class="font-cinzel text-xl font-bold text-gold mb-4">QR Код</h3>
+                    <p class="text-gray-400 text-sm mb-4">Скануйте для швидкого доступу</p>
+                    <div class="bg-white p-2 rounded-lg inline-block">
+                        <!-- QR Code placeholder - using a free QR API -->
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://discord.gg/your-server" alt="QR Code" class="w-32 h-32">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500 text-sm">© 2024 LSPDFR Elite Studio. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

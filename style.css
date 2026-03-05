@@ -1,0 +1,655 @@
+/* ============================================
+   LSPDFR ELITE STUDIO - Custom Styles
+   ============================================ */
+
+/* ============================================
+   TAILWIND CONFIGURATION (Custom Theme)
+   ============================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (Variables)
+   ============================================ */
+:root {
+    /* Gold Color Palette */
+    --color-gold: #eab308;
+    --color-gold-light: #facc15;
+    --color-gold-dark: #ca8a04;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Z-index layers */
+    --z-dropdown: 30;
+    --z-sticky: 40;
+    --z-fixed: 50;
+    --z-modal-backdrop: 60;
+    --z-modal: 70;
+    --z-popover: 80;
+    --z-tooltip: 90;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+@layer base {
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #1f2937;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #4b5563;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+    }
+    
+    /* Selection */
+    ::selection {
+        background: var(--color-gold);
+        color: #000;
+    }
+    
+    /* Body */
+    body {
+        @apply antialiased;
+    }
+}
+
+/* ============================================
+   CUSTOM UTILITY CLASSES
+   ============================================ */
+@layer utilities {
+    /* Gold text color */
+    .text-gold {
+        color: var(--color-gold);
+    }
+    
+    /* Gold background */
+    .bg-gold {
+        background-color: var(--color-gold);
+    }
+    
+    /* Gold border */
+    .border-gold {
+        border-color: var(--color-gold);
+    }
+    
+    /* Gold hover */
+    .hover\:bg-gold:hover {
+        background-color: var(--color-gold);
+    }
+    
+    /* Gold text on hover */
+    .hover\:text-gold:hover {
+        color: var(--color-gold);
+    }
+    
+    /* Cinzel font */
+    .font-cinzel {
+        font-family: 'Cinzel', serif;
+    }
+    
+    /* Smooth scroll */
+    .scroll-smooth {
+        scroll-behavior: smooth;
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In Delay */
+@keyframes fadeInDelay {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In Delay 2 */
+@keyframes fadeInDelay2 {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide In (for notifications) */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide Out */
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+/* Float Animation (for buttons) */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Pulse Glow */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--color-gold);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--color-gold), 0 0 30px var(--color-gold-light);
+    }
+}
+
+/* Cart Item Fly Animation */
+@keyframes flyToCart {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) translate(200px, -200px);
+    }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.animate-fade-in-delay {
+    animation: fadeInDelay 1s ease 0.3s forwards;
+    opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+    animation: fadeInDelay2 1s ease 0.6s forwards;
+    opacity: 0;
+}
+
+.animate-slide-in {
+    animation: slideIn 0.5s ease forwards;
+}
+
+.animate-slide-out {
+    animation: slideOut 0.5s ease forwards;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* ============================================
+   HERO SECTION STYLES
+   ============================================ */
+#hero-video {
+    /* Ensures video covers entire section */
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ============================================
+   PRODUCT CARD STYLES
+   ============================================ */
+.product-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(234, 179, 8, 0.1) 100%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.product-card:hover::before {
+    opacity: 1;
+}
+
+/* Buy button animation container */
+.buy-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.buy-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.buy-btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Flying item animation */
+.flying-item {
+    position: fixed;
+    z-index: 100;
+    pointer-events: none;
+    animation: flyToCart 0.8s ease-in-out forwards;
+}
+
+/* ============================================
+   COMPARISON TABLE STYLES
+   ============================================ */
+.comparison-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.comparison-table th,
+.comparison-table td {
+    border-bottom: 1px solid #374151;
+}
+
+.comparison-table th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+.comparison-table th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+.comparison-table tr:last-child td:first-child {
+    border-radius: 0 0 0 8px;
+}
+
+.comparison-table tr:last-child td:last-child {
+    border-radius: 0 0 8px 0;
+}
+
+.comparison-table tbody tr {
+    transition: background-color var(--transition-fast);
+}
+
+.comparison-table tbody tr:hover {
+    background-color: rgba(234, 179, 8, 0.05);
+}
+
+/* ============================================
+   360 GALLERY SLIDER STYLES
+   ============================================ */
+#360-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: linear-gradient(to right, var(--color-gold) 0%, var(--color-gold) var(--progress, 2.78%), #374151 var(--progress, 2.78%), #374151 100%);
+    border-radius: 4px;
+    outline: none;
+}
+
+#360-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: transform var(--transition-fast);
+}
+
+#360-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+#360-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   CART SIDEBAR STYLES
+   ============================================ */
+#cart-sidebar {
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#cart-sidebar.open {
+    transform: translateX(0);
+}
+
+/* Cart item */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #374151;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.cart-item-image {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    background: #1f2937;
+}
+
+/* Quantity controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantity-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #4b5563;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.quantity-btn:hover {
+    background: var(--color-gold);
+    color: black;
+}
+
+.quantity-value {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ============================================
+   CHAT WINDOW STYLES
+   ============================================ */
+#chat-window {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+#chat-window.hidden {
+    display: none;
+}
+
+/* Chat messages */
+#chat-messages .message {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+#chat-messages .message.user {
+    flex-direction: row-reverse;
+}
+
+#chat-messages .message-content {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 12px;
+}
+
+#chat-messages .message.bot .message-content {
+    background: #374151;
+    border-bottom-left-radius: 4px;
+}
+
+#chat-messages .message.user .message-content {
+    background: var(--color-gold);
+    color: black;
+    border-bottom-right-radius: 4px;
+}
+
+/* ============================================
+   MODAL STYLES
+   ============================================ */
+#login-modal {
+    backdrop-filter: blur(4px);
+}
+
+#login-modal.hidden {
+    display: none;
+}
+
+/* ============================================
+   LIVE SALES NOTIFICATION
+   ============================================ */
+#live-sales {
+    max-width: 300px;
+}
+
+#live-sales.hidden {
+    display: none;
+}
+
+/* ============================================
+   BUTTON HOVER EFFECTS
+   ============================================ */
+button, 
+.btn {
+    transition: all var(--transition-normal);
+}
+
+/* ============================================
+   RESPONSIVE STYLES
+   ============================================ */
+@media (max-width: 768px) {
+    /* Adjust hero text size */
+    .font-cinzel {
+        font-size: 2rem;
+    }
+    
+    /* Smaller product cards on mobile */
+    .product-card {
+        margin-bottom: 16px;
+    }
+    
+    /* Chat window full width on mobile */
+    #chat-window {
+        width: calc(100% - 32px);
+        right: 16px;
+    }
+    
+    /* Cart sidebar full width on mobile */
+    #cart-sidebar {
+        width: 100%;
+    }
+    
+    /* Support button adjustments */
+    #support-btn {
+        bottom: 80px;
+    }
+    
+    #cart-btn {
+        bottom: 80px;
+        right: 16px;
+    }
+    
+    /* Hide scroll indicator on mobile */
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.hidden {
+    display: none !important;
+}
+
+.block {
+    display: block !important;
+}
+
+.flex {
+    display: flex !important;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+/* ============================================
+   BACKGROUND EFFECTS
+   ============================================ */
+.bg-gradient-to-b {
+    background: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
+.from-gray-900 {
+    --tw-gradient-from: #111827;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(17, 24, 39, 0));
+}
+
+.to-gray-800 {
+    --tw-gradient-to: #1f2937;
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* ============================================
+   FOCUS STATES (Accessibility)
+   ============================================ */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    #hero-video,
+    #cart-btn,
+    #support-btn,
+    #live-sales,
+    #login-modal {
+        display: none !important;
+    }
+}
